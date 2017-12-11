@@ -9,19 +9,23 @@ const mongoose = require('mongoose');
 // Gets access to mongoose User model class
 const User = mongoose.model('users');
 
-// Function that takes a User model and generates unique identifier for user.
+// Takes a User model and generates unique identifier(toekn) for user. - Then stuff it into a cookie
+// Call serializUser with the user to generate the identifying piece of info
 passport.serializeUser((user, done) => {
-  done(null, user.id); // ID from mongoDB vs. google ID
+  done(null, user.id); // Using ID from mongoDB vs. google ID - bcuz diff way of signing in (google, facebook, etc)
 });
 
-// Function that takes an ID/cookie and turns it into a mongoose model instance
+// Takes an ID/cookie/Token, pass to deserializeUser and turns it into a user model instance
+// Take identifying piece of info from cookie, pass into 'deserializeUser' to turn it into a user
 passport.deserializeUser((id, done) => {
   User.findById(id).then(user => {
     done(null, user);
   });
 });
 
-// 1) Passport configuration
+// ===========================
+// 1) PASSPORT CONFIGURATION
+// ===========================
 passport.use(
   new GoogleStrategy(
     {
