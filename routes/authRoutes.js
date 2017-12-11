@@ -16,16 +16,18 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google'), // Tell passport to handle this incoming request using the google strategy
     (req, res) => {
-      res.redirect('/surveys'); // After you login - redirect
+      res.redirect('/'); // After you login - redirect
     }
   );
 
+  // LOGOUT
   app.get('/api/logout', (req, res) => {
     req.logout();
     // res.send(req.user);
     res.redirect('/');
   });
 
+  // RETURNS CURRENT USER
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });

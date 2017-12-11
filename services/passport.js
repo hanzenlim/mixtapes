@@ -9,14 +9,18 @@ const mongoose = require('mongoose');
 // Gets access to mongoose User model class
 const User = mongoose.model('users');
 
-// Takes a User model and generates unique identifier(toekn) for user. - Then stuff it into a cookie
-// Call serializUser with the user to generate the identifying piece of info
+// ===========================
+// SERIALIZE USER
+// ===========================
+// Takes a User model and generates unique identifier(Token) for user. - Then passport will stuff it into a cookie
 passport.serializeUser((user, done) => {
   done(null, user.id); // Using ID from mongoDB vs. google ID - bcuz diff way of signing in (google, facebook, etc)
 });
-
-// Takes an ID/cookie/Token, pass to deserializeUser and turns it into a user model instance
-// Take identifying piece of info from cookie, pass into 'deserializeUser' to turn it into a user
+// ===========================
+// DESERIALIZE USER
+// ===========================
+// Takes the Token(user.id), pass to deserializeUser and turns it into a user model instance.
+// End result = User model instances added to req.user
 passport.deserializeUser((id, done) => {
   User.findById(id).then(user => {
     done(null, user);
