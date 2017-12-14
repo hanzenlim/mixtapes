@@ -38,6 +38,17 @@ passport.use(
       callbackURL: '/auth/google/callback', // After user grants permissions - redirect to this route
       proxy: true
     },
+    // (accessToken, refreshToken, profile, done) => {
+    //   User.findOne({ googleId: profile.id}).then(existingUser => {
+    //     if (existingUser) {
+    //       done(null, existingUser);
+    //     } else {
+    //       new User ({googleId: profile.id})
+    //       .save()
+    //       .then(user => done(null, user))
+    //     }
+    //   })
+    // }
     // Opportunity to take all the info that we just got back (profile: user info | accessToken: gives us permission from google)
     async (accessToken, refreshToken, profile, done) => {
       // ===========================================

@@ -1,10 +1,13 @@
 const express = require('express');
 const authRoutes = require('./routes/authRoutes'); // Function - takes app and attaches the auth routes
+const videoRoutes = require('./routes/videoRoutes');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session'); // Keeps track of user sessions using cookies
 const passport = require('passport');
 const keys = require('./config/keys');
+//===================
 // MODELS
+//===================
 require('./models/User'); // Order of operation matters
 // EXECUTES PASSPORT
 require('./services/passport');
@@ -26,7 +29,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//===================
+// ROUTES
+//===================
 authRoutes(app); // call authroutes with app
+videoRoutes(app);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT);

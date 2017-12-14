@@ -15,6 +15,7 @@ module.exports = app => {
   app.get(
     '/auth/google/callback',
     passport.authenticate('google'), // Tell passport to handle this incoming request using the google strategy
+    // After succesful authentification, peform this arrow function
     (req, res) => {
       res.redirect('/'); // After you login - redirect
     }
@@ -23,8 +24,7 @@ module.exports = app => {
   // LOGOUT
   app.get('/api/logout', (req, res) => {
     req.logout();
-    // res.send(req.user);
-    res.redirect('/');
+    res.redirect('/'); // After logging out redirect to root
   });
 
   // RETURNS CURRENT USER
