@@ -8,9 +8,12 @@ import Header from './Header';
 import Landing from './Landing';
 const Playlist = () => <h2>Playlist</h2>;
 
+// YOUTUBE API KEY
+const API_KEY = 'AIzaSyB9pwMqxJohEB7sn6igdChSjU_hgg-CkjU';
+
 class App extends Component {
   componentDidMount() {
-    this.props.fetchUser();
+    this.props.fetchUser(); // From actions
   }
 
   render() {
