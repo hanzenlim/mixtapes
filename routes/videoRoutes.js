@@ -1,5 +1,5 @@
 module.exports = app => {
-  app.get('/videos', (req, res) => {
+  app.get('/api/videos', (req, res) => {
     res.send('Videos Get Route');
   });
 };
